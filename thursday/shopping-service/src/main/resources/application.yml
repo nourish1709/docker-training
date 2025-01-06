@@ -23,9 +23,11 @@ spring:
     # todo: uncomment the line below
 #    url: jdbc:postgresql://db:5432/shopping
     url: jdbc:postgresql://localhost:5432/shopping
-    username: postgres
+#    username: postgres
     # todo: use env vars to inject custom creds
 #    password: password
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
   jpa:
     show-sql: true
     database: postgresql

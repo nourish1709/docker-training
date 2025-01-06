@@ -31,6 +31,25 @@ services:
     build:
       context: ./infrastructure/redis
       dockerfile: Dockerfile
+  shopping:
+    image: shopping-service
+    ports:
+      - "8080:8080"
+    build:
+      context: ./shopping-service
+      dockerfile: Dockerfile
+    environment:
+#      SPRING_APPLICATION_NAME: shopping-service
+#      todo: utilize the variable below
+#      SPRING_PROFILES_ACTIVE: loc
+#      SPRING_CLOUD_CONFIG_URI: http://localhost:7999/config
+#      SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/shopping
+      DB_USERNAME: /run/secrets/db_user
+      DB_PASSWORD: /run/secrets/db_password
+#      SPRING_KAFKA_BOOTSTRAP_SERVERS: localhost:9092
+    depends_on:
+      - db
+      - kafka
 
 secrets:
   db_user:
