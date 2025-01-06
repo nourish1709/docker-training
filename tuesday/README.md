@@ -30,6 +30,31 @@ cat >> /usr/local/apache2/htdocs/index.html << EOF
 EOF
 ```
 
+**Commands you might need to use:**
+
+```bash
+# start an httpd container
+docker run -d -p 8080:80 --rm --name local-httpd httpd:2.4
+
+# check the logs of the running container
+docker logs local-httpd
+
+# inspect the container
+docker exec -it local-httpd /bin/bash
+# change current directory
+cd /usr/local/apache2/htdocs/
+# check the content of the directory
+ls
+# check the content of the file index.html
+cat index.html
+# update the content of the file index.html
+cat >> index.html << EOF
+<h1>hello world</h1>
+EOF
+# exit the container shell
+exit
+```
+
 ## Task 2
 
 Pull and run a custom [nourish1709/httpd:1.0](https://hub.docker.com/repository/docker/nourish1709/httpd/general)
@@ -37,6 +62,15 @@ container with exposed `8080` port. To check if it runs correctly open `localhos
 
 - discover why does the current container return a different response. use `docker exec -it <container> /bin/bash` to
   inspect the container. Check the `/usr/local/apache2/htdocs/` and see the resources
+
+**Commands you might need to use:**
+
+```bash
+# start the custom httpd container
+docker run -d -p 8080:80 --rm --name custom-httpd nourish1709/httpd:1.0
+
+# same commands as in the Task 1
+```
 
 ## Task 3
 
@@ -50,9 +84,15 @@ the response is the same as in the "Task 2". Achieve the desired result by:
 
 Make sure to try both methods provided above
 
-Command to run `httpd` container with the bind mount:
+**Commands you might need to use:**
 
 ```bash
+# build an image from Dockerfile
+docker build -t local-httpd:1.0 .
+# start a httpd container using the built image
+docker run -d -p 8080:80 --rm --name my-httpd local-httpd:1.0
+
+# start a httpd container with the bind mount
 docker run -d -p 8080:80 --rm --name local-httpd -v $(pwd)/static:/usr/local/apache2/htdocs/:ro httpd:2.4
 ```
 
@@ -76,3 +116,20 @@ a `/usr/local/tomcat/webapps/my_servlet.war` file, the servlet will be available
 3. Add you own servlet named `UserServlet` along with `HelloServlet`. The servlet should return an HTML page with
    current date and your name. Update [index.jsp](./servlet/src/main/webapp/index.jsp) to contain `<a>` reference to the
    new servlet. Deploy the servlet and make sure it works correctly.
+
+**Steps to complete the task:**
+
+- Run `mvn clean package` to build the project
+- Build an image from the updated Dockerfile:
+
+```bash
+docker build -t local-tomcat:1.0 ./servlet
+```
+
+- Start a container using the built image:
+
+```bash
+docker run -d -p 8080:8080 --rm --name my-tomcat local-tomcat:1.0
+```
+
+- Check the servlets at `localhost:8080/my_servlet`
