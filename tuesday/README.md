@@ -60,13 +60,12 @@ to a Tomcat container.
 Your task is to:
 
 1. Update the [Dockerfile](./servlet/Dockerfile) to deploy the servlet to a Tomcat container.
-2. Create an image from the updated Dockerfile and start a container. Make sure that the servlet is available at
-   `localhost:8080/{artifact}` endpoint.
+2. Create an image from the updated Dockerfile and start a container (don't forget to expose the port `8080`). Make sure
+   that the servlet is available at `localhost:8080/{artifact}` endpoint.
 
 __Note__ that the destination `.war` filename is used as the base path for the servlet. For example, if you create
 a `/usr/local/tomcat/webapps/my_servlet.war` file, the servlet will be available at `localhost:8080/my_servlet/`
 
-3. Add you own servlet along with
-   the [HelloServlet](./servlet/src/main/java/com/nourish1709/learning/servlet/HelloServlet.java). The servlet should
-   return an HTML page with current date and your name. Update [index.jsp](./servlet/src/main/webapp/index.jsp) to
-   contain `<a>` reference to the new servlet. Deploy the servlet and make sure it works correctly.
+3. Add you own servlet named `UserServlet` along with `HelloServlet`. The servlet should return an HTML page with
+   current date and your name. Update [index.jsp](./servlet/src/main/webapp/index.jsp) to contain `<a>` reference to the
+   new servlet. Deploy the servlet and make sure it works correctly.
