@@ -50,6 +50,12 @@ the response is the same as in the "Task 2". Achieve the desired result by:
 
 Make sure to try both methods provided above
 
+Command to run `httpd` container with the bind mount:
+
+```bash
+docker run -d -p 8080:80 --rm --name local-httpd -v $(pwd)/static:/usr/local/apache2/htdocs/:ro httpd:2.4
+```
+
 ## Task 4
 
 Check the existing [servlet](./servlet) folder. It contains a
