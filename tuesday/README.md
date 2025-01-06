@@ -10,7 +10,8 @@ Current tasks will help you to practice docker usage.
 ## Task 1
 
 Run a simple [httpd:2.4](https://hub.docker.com/_/httpd) (`docker.io/library/httpd:2.4` for podman) container with an
-exposed `8080` port. To check if it runs correctly just open `localhost:8080`
+exposed `8080` port. Note that `httpd` by default exposes the port `80`, so you need to map it to port `8080` on the
+host. To check if the container runs correctly just open `localhost:8080`
 
 - review the logs of the running container
 - use `docker exec -it <container_id> /bin/bash` to inspect the container. Check the package where sources are placed:
@@ -58,7 +59,8 @@ exit
 ## Task 2
 
 Pull and run a custom [nourish1709/httpd:1.0](https://hub.docker.com/repository/docker/nourish1709/httpd/general)
-container with exposed `8080` port. To check if it runs correctly open `localhost:8080`
+container with exposed `8080` port. Note that `httpd` by default exposes the port `80`, so you need to map it to port
+`8080` on the host. To check if it runs correctly open `localhost:8080`
 
 - discover why does the current container return a different response. use `docker exec -it <container> /bin/bash` to
   inspect the container. Check the `/usr/local/apache2/htdocs/` and see the resources
