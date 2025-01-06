@@ -45,7 +45,8 @@ Ensure that the resources are available on the `localhost:8080` endpoint and the
 2". Achieve the desired result by:
 
 - using [Dockerfile](./Dockerfile). Check the [documentation](https://docs.docker.com/reference/dockerfile/) if needed
-- using `docker run` along with [volumes](https://docs.docker.com/engine/storage/volumes/#options-for---volume)
+- using `docker run` along with [bind mounts](https://docs.docker.com/engine/storage/bind-mounts/#options-for---volume).
+  Mount the sources with read-only mode
 
 Make sure to try both methods provided above
 
