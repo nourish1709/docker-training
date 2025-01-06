@@ -8,5 +8,7 @@
         <h1><%= "JSP - Hello World! (main page)" %></h1>
         <br/>
         <a href="hello-servlet">Hello Servlet</a>
+        <br/>
+        <a href="user-servlet">User Servlet</a>
     </body>
 </html>
