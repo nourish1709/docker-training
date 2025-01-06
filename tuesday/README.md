@@ -9,11 +9,11 @@ Current tasks will help you to practice docker usage.
 
 ## Task 1
 
-Run a simple [httpd:2.4](https://hub.docker.com/_/httpd) container with an exposed `8080` port. To check if it runs
-correctly just open `localhost:8080`
+Run a simple [httpd:2.4](https://hub.docker.com/_/httpd) (`docker.io/library/httpd:2.4` for podman) container with an
+exposed `8080` port. To check if it runs correctly just open `localhost:8080`
 
 - review the logs of the running container
-- use `docker exec -it <container_id> bash` to inspect the container. Check the package where sources are placed:
+- use `docker exec -it <container_id> /bin/bash` to inspect the container. Check the package where sources are placed:
   `/usr/local/apache2/htdocs/`. (useful commands: `pwd`, `ls`, `cat`, to exit use `exit` command)
 - update the found `index.html` content with any desired changes.
 - verify that the httpd server shows different content according to your changes.
@@ -35,14 +35,14 @@ EOF
 Pull and run a custom [nourish1709/httpd:1.0](https://hub.docker.com/repository/docker/nourish1709/httpd/general)
 container with exposed `8080` port. To check if it runs correctly open `localhost:8080`
 
-- discover why does the current container return a different response. use `docker exec -it <container> bash` to inspect
-  the container. Check the `/usr/local/apache2/htdocs/` and see the resources
+- discover why does the current container return a different response. use `docker exec -it <container> /bin/bash` to
+  inspect the container. Check the `/usr/local/apache2/htdocs/` and see the resources
 
 ## Task 3
 
-Run a [httpd:2.4](https://hub.docker.com/_/httpd) container with resources provided in the [static](./static) folder.
-Ensure that the resources are available on the `localhost:8080` endpoint and the response is the same as in the "Task
-2". Achieve the desired result by:
+Run a [httpd:2.4](https://hub.docker.com/_/httpd) (`docker.io/library/httpd:2.4` for podman) container with resources
+provided in the [static](./static) folder. Ensure that the resources are available on the `localhost:8080` endpoint and
+the response is the same as in the "Task 2". Achieve the desired result by:
 
 - using [Dockerfile](./Dockerfile). Check the [documentation](https://docs.docker.com/reference/dockerfile/) if needed
 - using `docker run` along with [bind mounts](https://docs.docker.com/engine/storage/bind-mounts/#options-for---volume).
