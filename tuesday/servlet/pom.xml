@@ -4,11 +4,16 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.nourish1709.learning</groupId>
     <artifactId>servlet</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>servlet</name>
     <packaging>war</packaging>
+
+    <parent>
+        <groupId>com.nourish1709.learning</groupId>
+        <artifactId>tuesday</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
