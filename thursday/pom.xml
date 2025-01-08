@@ -27,7 +27,8 @@
     <modules>
         <module>config-service</module>
         <module>shopping-service</module>
-        <module>compose-tester</module>
+        <module>functional-tests</module>
+        <module>infrastructure-tests</module>
     </modules>
 
     <dependencyManagement>

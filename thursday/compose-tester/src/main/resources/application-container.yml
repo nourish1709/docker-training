@@ -1,3 +1,0 @@
-hosts:
-  config-service: config:8080
-  shopping-service: shopping:8080

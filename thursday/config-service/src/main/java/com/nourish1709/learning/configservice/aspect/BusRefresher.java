@@ -24,18 +24,7 @@ public class BusRefresher {
 
     @After("@annotation(com.nourish1709.learning.configservice.aspect.RefreshSettings) && args(application, ..)")
     public void invokeRefreshEvent(String application) {
-//        var destination = getDestination(application);
-
         log.info("Broadcasting a refresh event through the bus: {}. Destination: {}", busId, application);
         publisher.publishEvent(new RefreshRemoteApplicationEvent(this, this.busId, destinationFactory.getDestination(application)));
     }
-//
-//    private String getDestination(String application) {
-//        return isProfileSpecific(application) ?
-//                substringBeforeLast(application, "-") : application;
-//    }
-//
-//    private boolean isProfileSpecific(String application) {
-//        return countMatches(substringAfter(application, "treeservices-"), "-") > 0;
-//    }
 }

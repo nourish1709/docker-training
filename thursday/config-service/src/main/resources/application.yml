@@ -6,14 +6,9 @@ spring:
       server:
         prefix: config
     refresh:
-      # todo: try without this property
       enabled: false
   data:
     redis:
-#      cluster:
-#        nodes: redis-cluster:6379
-
-#      host: redis-cluster
       host: localhost
       port: 6379
   profiles:
@@ -21,11 +16,17 @@ spring:
     group:
       dev:
         - redis
-  kafka:
-#    bootstrap-servers: kafka-container:9092
-    bootstrap-servers: localhost:9092
+      container:
+        - container
+        - redis
 
+management:
+  endpoint:
+    health:
+      show-details: always
+  health:
+    binders:
+      enabled: true
 
-# todo: remove this property
 server:
-  port: 7999
+  port: 8888

@@ -1,9 +1,0 @@
-spring:
-  application:
-    name: compose-tester
-server:
-  port: 7998
-
-hosts:
-  config-service: localhost:7999
-  shopping-service: localhost:8080

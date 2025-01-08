@@ -1,33 +1,13 @@
 spring:
   application:
     name: shopping-service
-#  cloud:
-#    config:
-#      import-check:
-#        enabled: false
-#      verify-properties:
-#        enabled: true
-#    refresh:
-      # todo: update these values
-#      never-refreshable: com.ancestry.trees.config.DbConfig, com.ancestry.trees.media.config.KafkaConfig
-  config:
-    # todo: uncomment the link to the container
-#    import: optional:configserver:http://config-service-container/config
-    import: optional:configserver:http://localhost:7999/config
   kafka:
-#    bootstrap-servers: kafka-container:9092
     bootstrap-servers: localhost:9092
   datasource:
     type: org.postgresql.ds.PGSimpleDataSource
     driver-class-name: org.postgresql.Driver
-    # todo: uncomment the line below
-#    url: jdbc:postgresql://db:5432/shopping
     url: jdbc:postgresql://localhost:5432/shopping
-#    username: postgres
-    # todo: use env vars to inject custom creds
-#    password: password
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+    username: student
   jpa:
     show-sql: true
     database: postgresql
@@ -44,10 +24,7 @@ features:
   discount:
     available: false
 
-#  profiles:
-#    default: dev
-#    group:
-#      dev:
-#        - default
-#        - aws
-#        - developer
+management:
+  health:
+    binders:
+      enabled: true
