@@ -1,0 +1,103 @@
+services:
+  db:
+    image: postgres:17.2
+    secrets:
+      - db_user
+      - db_password
+    networks:
+      - db
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: password
+      POSTGRES_DB: shopping
+      POSTGRES_USER_FILE: /run/secrets/db_user
+      POSTGRES_PASSWORD_FILE: /run/secrets/db_password
+
+  redis:
+    image: redis:7.4.1
+    networks:
+      - redis
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.8.0
+    networks:
+      - kafka
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+
+  kafka:
+    image: confluentinc/cp-kafka:7.8.0
+    networks:
+      - kafka
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+
+  config-service:
+    build:
+      context: ./config-service
+      dockerfile: Dockerfile
+    environment:
+      SPRING_PROFILES_ACTIVE: container
+    depends_on:
+      - kafka
+      - redis
+    networks:
+      - redis
+      - kafka
+      - apps
+
+  shopping-service:
+    build:
+      context: ./shopping-service
+      dockerfile: Dockerfile
+    secrets:
+      - db_user
+      - db_password
+    environment:
+      SPRING_PROFILES_ACTIVE: container
+    depends_on:
+      - db
+      - kafka
+      - config-service
+    networks:
+      - db
+      - kafka
+      - apps
+
+  functional-tests:
+    image: maven:3.9.9-amazoncorretto-21-alpine
+    networks:
+      - apps
+    depends_on:
+      - config-service
+      - shopping-service
+    volumes:
+      - ./:/usr/src/mymaven
+    working_dir: /usr/src/mymaven
+    command:
+      - mvn
+      - clean
+      - test
+      - -pl
+      - :functional-tests
+      - -Dspring.profiles.active=container
+
+networks:
+  kafka:
+  db:
+  redis:
+  apps:
+
+secrets:
+  db_user:
+    file: ./infrastructure/db/user.txt
+  db_password:
+    file: ./infrastructure/db/password.txt
+
