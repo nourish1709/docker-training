@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: shopping-service
+  kafka:
+    bootstrap-servers: localhost:9092
+  datasource:
+    type: org.postgresql.ds.PGSimpleDataSource
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/shopping
+    username: student
+  jpa:
+    show-sql: true
+    database: postgresql
+    hibernate:
+      ddl-auto: none
+  sql:
+    init:
+      mode: always
+  data:
+    jdbc:
+      dialect: postgresql
+
+features:
+  discount:
+    available: false
+
+management:
+  health:
+    binders:
+      enabled: true

@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: config-service
+  cloud:
+    config:
+      server:
+        prefix: config
+    refresh:
+      enabled: false
+  data:
+    redis:
+      host: localhost
+      port: 6379
+  profiles:
+    default: dev
+    group:
+      dev:
+        - redis
+      container:
+        - container
+        - redis
+
+management:
+  endpoint:
+    health:
+      show-details: always
+  health:
+    binders:
+      enabled: true
+
+server:
+  port: 8888
