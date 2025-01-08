@@ -1,0 +1,11 @@
+spring:
+  config:
+    import:
+      - optional:configtree:/run/secrets/
+      - optional:configserver:http://config-service:8080/config
+  datasource:
+    url: jdbc:postgresql://db:5432/shopping
+    username: ${db_user}
+    password: ${db_password}
+  kafka:
+    bootstrap-servers: kafka:9092
