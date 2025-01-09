@@ -86,6 +86,8 @@ Kafka.
 - Execute the following tests:
     - `com.nourish1709.learning.infrastructuretests.ConfigServiceInfrastructureTest`.
     - `com.nourish1709.learning.infrastructuretests.ShoppingServiceInfrastructureTest`.
+- Run the Shopping Service with `host` profile (`com.nourish1709.learning.shoppingservice.ShoppingServiceApplication`)
+- Execute the following tests:
     - `com.nourish1709.learning.functionaltests.FunctionalTests`
 
 ### Task 2: Full Application Setup
