@@ -7,6 +7,12 @@ Current tasks will help you to practice docker usage.
 - [Task 3](#task-3)
 - [Task 4](#task-4)
 
+### Prerequisites
+
+- If you're using Intellij IDEA, make sure to configure the following Maven projects:
+    - tuesday (`./tuesday/pom.xml`)
+    - servlet (`./tuesday/servlet/pom.xml`)
+
 ## Task 1
 
 Run a simple [httpd:2.4](https://hub.docker.com/_/httpd) (`docker.io/library/httpd:2.4` for podman) container with an

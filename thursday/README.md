@@ -21,6 +21,15 @@ The architecture includes additional services such as Redis, Postgres, Kafka, al
 - **Shopping Service**: Fetches properties from the Config Service and interacts with Postgres.
 - **Functional Tests**: Verifies integration and functionality of the services.
 
+### Prerequisites
+
+- If you're using Intellij IDEA, make sure to configure the following Maven projects:
+    - thursday (`./thursday/pom.xml`)
+    - config-service (`./thursday/config-service/pom.xml`)
+    - shopping-service (`./thursday/shopping-service/pom.xml`)
+    - functional-tests (`./thursday/functional-tests/pom.xml`)
+    - infrastructure-tests (`./thursday/infrastructure-tests/pom.xml`)
+
 ## Tasks
 
 ### Task 0: Basic Setup
@@ -114,7 +123,7 @@ Kafka.
     - Use the `confluentinc/cp-kafka:7.8.0` image.
     - Expose port `9092` on the host machine.
     - Depend on Zookeeper.
-    - Configure the following environment variables (Note that `KAFKA_ADVERTISED_LISTENERS` value is different):
+    - Configure the following environment variables (**Note that `KAFKA_ADVERTISED_LISTENERS` value is different**):
         - `KAFKA_BROKER_ID: 1`
         - `KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181`
         - `KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092`
